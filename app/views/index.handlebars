@@ -1,0 +1,64 @@
+<h1>Available Burgers</h1>
+<ul>
+    {{#each burgers}}
+        {{#unless devoured}}
+    <li>
+        {{burger_name}}
+        <button class="devour" data-id="{{id}}">Devour!</button>
+    </li>
+    {{/each}}
+</ul>
+
+<h1>Devoured Burgers</h1>
+<ul>
+    {{#each burgers}}
+        {{#if devoured}}
+    <li>
+        {{burger_name}}
+        <button class="devour" data-id="{{id}}">Devour!</button>
+    </li>
+    {{/each}}
+</ul>
+
+<h2>Add a burger</h2>
+<form id="create_burger_form" action="/api/burgers" method="POST">
+    <input type="text" name="burger_name">
+    <button>Add Burger</button>
+</form>
+
+<script>
+    $("#create_burger_form").on("submit", (e) => {
+        e.preventDefault();
+
+        const burgerData = {
+            burger_name: $('[name="burger_name"]').val()
+        };
+
+        $.ajax("/api/burgers", {
+            method: "POST",
+            data: burgerData
+        })
+        .then( () => {
+            location.reload();
+        })
+    })
+
+    $(".devour").on("click", function() {
+        const burgerID = $(this).data("id");
+        const updateRoute = "/api/burgers/" + burgerID;
+        const burgerData = {
+
+        };
+
+        $.ajax({
+            url: updateRoute,
+            method: "PUT",
+            data: {
+                devoured: 1
+            }
+        })
+        .then( () => {
+            location.reload();
+        })
+    })
+</script>
