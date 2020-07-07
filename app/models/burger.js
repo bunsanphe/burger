@@ -7,8 +7,8 @@ const burger = {
     create(data, cb){
         orm.insertOne("burgers", data, cb);
     },
-    update(newValues, targetID, cb){
-        orm.updateOne("burgers", newValues, targetID, cb)
+    update(newValue, targetID, cb){
+        orm.updateOne("burgers", newValue, targetID, cb)
     },
 }
 

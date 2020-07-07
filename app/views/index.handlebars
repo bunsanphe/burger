@@ -6,6 +6,7 @@
         {{burger_name}}
         <button class="devour" data-id="{{id}}">Devour!</button>
     </li>
+        {{/unless}}
     {{/each}}
 </ul>
 
@@ -17,6 +18,7 @@
         {{burger_name}}
         <button class="devour" data-id="{{id}}">Devour!</button>
     </li>
+        {{/if}}
     {{/each}}
 </ul>
 
@@ -47,14 +49,14 @@
         const burgerID = $(this).data("id");
         const updateRoute = "/api/burgers/" + burgerID;
         const burgerData = {
-
+                devoured: 1
         };
 
         $.ajax({
             url: updateRoute,
             method: "PUT",
             data: {
-                devoured: 1
+                devoured: burgerData
             }
         })
         .then( () => {
