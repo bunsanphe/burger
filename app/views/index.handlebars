@@ -51,13 +51,10 @@
         const burgerData = {
                 devoured: 1
         };
-
         $.ajax({
             url: updateRoute,
             method: "PUT",
-            data: {
-                devoured: burgerData
-            }
+            data: burgerData
         })
         .then( () => {
             location.reload();
